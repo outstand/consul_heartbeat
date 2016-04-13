@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require 'consul_heartbeat/cli'
+
+ConsulHeartbeat::CLI.start
