@@ -6,8 +6,7 @@ module NodeHeartbeat
     URL = 'http://169.254.169.254/latest/meta-data/local-ipv4'.freeze
 
     def call
-      response = Excon.get(URL)
-      raise "Non-200 status #{response.status} from #{url}" if response.status != 200
+      response = Excon.get(URL, expects: [200], connect_timeout: 10, read_timeout: 10, write_timeout: 10, tcp_nodelay: true)
       OpenStruct.new(
         private_ip: response.body
       )
