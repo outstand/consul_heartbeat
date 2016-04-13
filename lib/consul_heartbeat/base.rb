@@ -6,9 +6,6 @@ module ConsulHeartbeat
       new(*args).call
     end
 
-    def initialize
-    end
-
     def call
       OpenStruct.new()
     end
