@@ -11,6 +11,7 @@ module NodeHeartbeat
     end
 
     def call
+      puts 'Heartbeat!'
       private_ip = GetPrivateIP.call.private_ip
       UploadIP.call(ip: private_ip, bucket: self.bucket)
     end

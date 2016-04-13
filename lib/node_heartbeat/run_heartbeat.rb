@@ -2,10 +2,11 @@ require 'node_heartbeat/base'
 require 'node_heartbeat/beat_once'
 
 module NodeHeartbeat
-  class StartHeartbeat < Base
+  class RunHeartbeat < Base
     attr_accessor :bucket
 
     SLEEP_TIME = 60 * 60 # 1 hour
+    ERROR_SLEEP_TIME = 5
 
     def initialize(bucket:)
       self.bucket = bucket
@@ -24,8 +25,14 @@ module NodeHeartbeat
 
       begin
         while true
-          BeatOnce.call(bucket: self.bucket)
-          sleep SLEEP_TIME
+          timeout = SLEEP_TIME
+          begin
+            BeatOnce.call(bucket: self.bucket)
+          rescue => e
+            puts "Warning: #{e.message}"
+            timeout = ERROR_SLEEP_TIME
+          end
+          sleep timeout
         end
       rescue Interrupt
         puts 'Exiting'
