@@ -1,4 +1,5 @@
 require 'node_heartbeat/base'
+require 'fog/aws'
 
 module NodeHeartbeat
   class UploadIP < Base
@@ -10,7 +11,12 @@ module NodeHeartbeat
     end
 
     def call
-      puts "upload ip #{self.ip} to bucket #{self.bucket}"
+      puts "Uploading ip #{self.ip} to bucket #{self.bucket}"
+      storage = Fog::Storage.new provider: 'AWS'
+      bucket = storage.directories.get(self.bucket)
+      bucket.files.create(
+        key: self.ip
+      )
     end
   end
 end
