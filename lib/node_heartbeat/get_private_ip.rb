@@ -1,6 +1,6 @@
-require 'consul_heartbeat/base'
+require 'node_heartbeat/base'
 
-module ConsulHeartbeat
+module NodeHeartbeat
   class GetPrivateIP < Base
     def call
       # http://169.254.169.254/latest/meta-data/local-ipv4

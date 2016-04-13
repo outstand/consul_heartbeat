@@ -1,6 +1,6 @@
-require 'consul_heartbeat/base'
+require 'node_heartbeat/base'
 
-module ConsulHeartbeat
+module NodeHeartbeat
   class UploadIP < Base
     attr_accessor :ip, :bucket
 

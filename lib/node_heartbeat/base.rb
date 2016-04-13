@@ -1,6 +1,6 @@
 require 'ostruct'
 
-module ConsulHeartbeat
+module NodeHeartbeat
   class Base
     def self.call(*args)
       new(*args).call

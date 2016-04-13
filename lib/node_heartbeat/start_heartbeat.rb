@@ -1,7 +1,7 @@
-require 'consul_heartbeat/base'
-require 'consul_heartbeat/beat_once'
+require 'node_heartbeat/base'
+require 'node_heartbeat/beat_once'
 
-module ConsulHeartbeat
+module NodeHeartbeat
   class StartHeartbeat < Base
     attr_accessor :bucket
 

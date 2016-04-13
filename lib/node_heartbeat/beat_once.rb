@@ -1,8 +1,8 @@
-require 'consul_heartbeat/base'
-require 'consul_heartbeat/get_private_ip'
-require 'consul_heartbeat/upload_ip'
+require 'node_heartbeat/base'
+require 'node_heartbeat/get_private_ip'
+require 'node_heartbeat/upload_ip'
 
-module ConsulHeartbeat
+module NodeHeartbeat
   class BeatOnce < Base
     attr_accessor :bucket
 

@@ -4,7 +4,7 @@ MAINTAINER Ryan Schlesinger <ryan@outstand.com>
 RUN addgroup heartbeat && \
     adduser -S -G heartbeat heartbeat
 
-RUN gem install consul_heartbeat
+RUN gem install node_heartbeat
 COPY docker-entrypoint.sh /docker-entrypoint.sh
 
 ENTRYPOINT ["/docker-entrypoint.sh"]

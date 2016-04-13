@@ -1,16 +1,16 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'consul_heartbeat/version'
+require 'node_heartbeat/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "consul_heartbeat"
-  spec.version       = ConsulHeartbeat::VERSION
+  spec.name          = "node_heartbeat"
+  spec.version       = NodeHeartbeat::VERSION
   spec.authors       = ["Ryan Schlesinger"]
   spec.email         = ["ryan@outstand.com"]
 
-  spec.summary       = %q{Heartbeat consul master server IPs to S3}
-  spec.homepage      = 'https://github.com/outstand/consul_heartbeat'
+  spec.summary       = %q{Heartbeat server IPs to S3}
+  spec.homepage      = 'https://github.com/outstand/node_heartbeat'
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
   spec.bindir        = 'exe'

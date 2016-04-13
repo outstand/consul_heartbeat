@@ -2,7 +2,7 @@
 set -e
 
 if [ "$(id -u)" = '0' ] && [ "$1" != 'ash' ]; then
-  exec gosu heartbeat consul_heartbeat "$@"
+  exec gosu heartbeat node_heartbeat "$@"
 fi
 
 exec "$@"
