@@ -20,7 +20,7 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+    $ docker run outstand/consul_heartbeat start --bucket=<s3 bucket>
 
 ## Development
 
