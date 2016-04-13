@@ -5,7 +5,7 @@ RUN addgroup heartbeat && \
     adduser -S -G heartbeat heartbeat
 
 # Use this to install an official release
-RUN apk --no-cache add libxml2 libxslt2 \
+RUN apk --no-cache add libxml2 libxslt \
     && apk --no-cache add --virtual build-dependencies build-base libxml2-dev libxslt-dev \
     && gem install nokogiri -- --use-system-libraries \
     && gem install node_heartbeat \
