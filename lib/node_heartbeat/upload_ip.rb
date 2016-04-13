@@ -12,7 +12,7 @@ module NodeHeartbeat
 
     def call
       puts "Uploading ip #{self.ip} to bucket #{self.bucket}"
-      storage = Fog::Storage.new provider: 'AWS'
+      storage = Fog::Storage.new provider: 'AWS', use_iam_profile: true
       bucket = storage.directories.get(self.bucket)
       bucket.files.create(
         key: self.ip
