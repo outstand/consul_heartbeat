@@ -4,11 +4,13 @@ MAINTAINER Ryan Schlesinger <ryan@outstand.com>
 RUN addgroup heartbeat && \
     adduser -S -G heartbeat heartbeat
 
+ENV NODE_HEARTBEAT_VERSION=0.1.1
+
 # Use this to install an official release
 RUN apk --no-cache add libxml2 libxslt \
     && apk --no-cache add --virtual build-dependencies build-base libxml2-dev libxslt-dev \
     && gem install nokogiri -- --use-system-libraries \
-    && gem install node_heartbeat \
+    && gem install node_heartbeat -v ${NODE_HEARTBEAT_VERSION} \
     && apk del build-dependencies
 
 # Use this to install a development version
