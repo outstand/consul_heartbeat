@@ -24,7 +24,7 @@ module NodeHeartbeat
       end
 
       begin
-        while true
+        loop do
           timeout = SLEEP_TIME
           begin
             BeatOnce.call(bucket: self.bucket)
