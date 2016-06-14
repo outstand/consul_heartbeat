@@ -1,28 +1,27 @@
-FROM outstand/ruby-base:2.2.4-alpine
+FROM outstand/ruby-base:2.3.1-alpine
 MAINTAINER Ryan Schlesinger <ryan@outstand.com>
 
 RUN addgroup heartbeat && \
     adduser -S -G heartbeat heartbeat
 
-ENV NODE_HEARTBEAT_VERSION=0.1.1
+RUN apk --no-cache add build-base openssh
 
-# Use this to install an official release
-RUN apk --no-cache add libxml2 libxslt \
-    && apk --no-cache add --virtual build-dependencies build-base libxml2-dev libxslt-dev \
-    && gem install nokogiri -- --use-system-libraries \
-    && gem install node_heartbeat -v ${NODE_HEARTBEAT_VERSION} \
-    && apk del build-dependencies
+ENV USE_BUNDLE_EXEC true
 
-# Use this to install a development version
-# RUN apk --no-cache add build-base libxml2-dev libxslt-dev
-# COPY . /node_heartbeat/
-# RUN cd /node_heartbeat \
-#     && bundle config build.nokogiri --use-system-libraries \
-#     && bundle install \
-#     && bundle exec rake install
+WORKDIR /node_heartbeat
+COPY Gemfile node_heartbeat.gemspec /node_heartbeat/
+COPY lib/node_heartbeat/version.rb /node_heartbeat/lib/node_heartbeat/
+COPY scripts/fetch-bundler-data.sh /node_heartbeat/scripts/fetch-bundler-data.sh
 
-COPY docker-entrypoint.sh /docker-entrypoint.sh
+ARG bundler_data_host
+RUN /node_heartbeat/scripts/fetch-bundler-data.sh ${bundler_data_host} && \
+    bundle install && \
+    git config --global push.default simple
+COPY . /node_heartbeat/
+RUN ln -s /node_heartbeat/exe/node_heartbeat /usr/local/bin/node_heartbeat
+
+COPY scripts/docker-entrypoint.sh /docker-entrypoint.sh
 
 ENV DUMB_INIT_SETSID 0
 ENTRYPOINT ["/docker-entrypoint.sh"]
-CMD []
+CMD ["help"]
